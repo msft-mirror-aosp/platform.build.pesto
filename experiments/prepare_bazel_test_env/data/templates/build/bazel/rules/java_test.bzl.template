@@ -74,7 +74,7 @@ java_test = rule(
         ),
         "_tradefed_script_help":
         attr.label(
-            default=Label("//tools/tradefederation/core:script_help"), ),
+            default=Label("//tools/tradefederation/core:atest_script_help"), ),
         "_tradefed_jars":
         attr.label(
             default=Label("//tools/tradefederation/core:tradefed_lib"), ),
