@@ -25,18 +25,24 @@ _LIB_SRCS = glob([
     "{prebuilts_dir_name}/host/lib/**/*",
     "{prebuilts_dir_name}/host/lib64/**/*"
 ])
-_TESTCASE_SRCS = glob(
+_TESTCASE_HOST_SRCS = glob(
     ["{prebuilts_dir_name}/host/testcases/hello_world_test/**/*"])
+_TESTCASE_DEVICE_SRCS = glob(["{prebuilts_dir_name}/target_testcases/hello_world_test/**/*"])
 
 _LIB_OUTS = [f.replace("{prebuilts_dir_name}/host/", "") for f in _LIB_SRCS]
-_TESTCASE_OUTS = [
-    f.replace("{prebuilts_dir_name}/host/testcases/hello_world_test/", "")
-    for f in _TESTCASE_SRCS
+_TESTCASE_HOST_OUTS = [
+    f.replace("{prebuilts_dir_name}/host/testcases/hello_world_test/", "host/")
+    for f in _TESTCASE_HOST_SRCS
+]
+_TESTCASE_DEVICE_OUTS = [
+    f.replace("{prebuilts_dir_name}/target_testcases/hello_world_test/", "device/")
+    for f in _TESTCASE_DEVICE_SRCS
 ]
 
+
 genrule(name="hello_world_test_prebuilt",
-        srcs=_LIB_SRCS + _TESTCASE_SRCS,
-        outs=_LIB_OUTS + _TESTCASE_OUTS,
+        srcs=_LIB_SRCS + _TESTCASE_HOST_SRCS + _TESTCASE_DEVICE_SRCS,
+        outs=_LIB_OUTS + _TESTCASE_HOST_OUTS + _TESTCASE_DEVICE_OUTS,
         cmd="""
           src_files=($(SRCS))
           out_files=($(OUTS))
