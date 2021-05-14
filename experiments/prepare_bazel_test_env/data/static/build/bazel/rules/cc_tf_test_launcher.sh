@@ -17,6 +17,11 @@ shift
 TEST_PATH=$1
 shift
 
+if [ $1 != "" ] && [ $1 == "--host" ]; then
+  HOST_ARGS=(-n --prioritize-host-config --skip-host-arch-check)
+  shift
+fi
+
 exec $TRADEFED_LAUNCHER template/atest_local_min \
     --template:map test=atest \
     --tests-dir "$TEST_PATH" \
@@ -27,7 +32,5 @@ exec $TRADEFED_LAUNCHER template/atest_local_min \
     --skip-loading-config-jar \
     --log-level-display VERBOSE \
     --log-level VERBOSE \
-    -n \
-    --prioritize-host-config \
-    --skip-host-arch-check \
+    "${HOST_ARGS[@]}" \
     "$@"
