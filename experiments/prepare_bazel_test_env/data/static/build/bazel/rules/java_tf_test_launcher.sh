@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# Launches a native CC test with Tradefed. The script expects the following:
+# Launches a Java test with Tradefed. The script expects the following:
 #   1. adb is present on the path.
 #   2. LD_LIBRARY_PATH is set for any libraries that need to be referenced.
 #   3. script_help.sh is included in the runfiles.
